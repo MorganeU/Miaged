@@ -6,6 +6,8 @@ class UserProfile extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Profil"),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
       ),
       body: const Center(
         child: Text('liste'),

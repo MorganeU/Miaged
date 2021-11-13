@@ -2,10 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:miaged/screens/clothing_detail.dart';
-import 'package:miaged/screens/clothing_list.dart';
+import 'package:miaged/screens/home.dart';
 import 'package:miaged/screens/login.dart';
-import 'package:miaged/screens/shopping_bag.dart';
-import 'package:miaged/screens/user_profile.dart';
+// import 'package:miaged/screens/shopping_bag.dart';
+// import 'package:miaged/screens/user_profile.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,10 +32,10 @@ class MyApp extends StatelessWidget {
       initialRoute: '/login',
       routes: <String, WidgetBuilder>{
         '/login': (BuildContext context) => LoginPage(),
-        '/home': (BuildContext context) => ClothingList(),
+        '/home': (BuildContext context) => Home(),
         '/detail': (BuildContext context) => ClothingDetail(),
-        '/bag': (BuildContext context) => ShoppingBag(),
-        '/profile': (BuildContext context) => UserProfile(),
+        // '/bag': (BuildContext context) => ShoppingBag(),
+        // '/profile': (BuildContext context) => UserProfile(),
       },
     );
   }

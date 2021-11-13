@@ -6,6 +6,8 @@ class ShoppingBag extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Panier"),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
       ),
       body: const Center(
         child: Text('liste'),
