@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:miaged/screens/clothing_detail.dart';
 
 // DEUXIEME PAGE : CLOTHING LIST -----------------------------------------------
 
@@ -38,7 +39,13 @@ class _ClothingListState extends State<ClothingList> {
                   itemCount: data.length,
                   itemBuilder: (BuildContext _context, int i) {
                     return InkWell(
-                        onTap: () => {},
+                        onTap: () => {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          ClothingDetail(clothe: data[i])))
+                            },
                         child: ListTile(
                             title: Column(
                           children: [

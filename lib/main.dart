@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:miaged/screens/clothing_detail.dart';
+// import 'package:miaged/screens/clothing_detail.dart';
 import 'package:miaged/screens/home.dart';
 import 'package:miaged/screens/login.dart';
 // import 'package:miaged/screens/shopping_bag.dart';
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         '/login': (BuildContext context) => LoginPage(),
         '/home': (BuildContext context) => Home(),
-        '/detail': (BuildContext context) => ClothingDetail(),
+        // '/detail': (BuildContext context) => ClothingDetail(),
         // '/bag': (BuildContext context) => ShoppingBag(),
         // '/profile': (BuildContext context) => UserProfile(),
       },
