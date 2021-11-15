@@ -6,13 +6,12 @@ import 'package:miaged/screens/clothing_detail.dart';
 
 class ClothingList extends StatefulWidget {
   const ClothingList({Key? key}) : super(key: key);
-
   @override
   _ClothingListState createState() => _ClothingListState();
 }
 
 class _ClothingListState extends State<ClothingList> {
-  Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>> GetData() async {
+  Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>> getData() async {
     QuerySnapshot<Map<String, dynamic>> res =
         await FirebaseFirestore.instance.collection('clothes').get();
     var clothes = res.docs;
@@ -30,7 +29,7 @@ class _ClothingListState extends State<ClothingList> {
           centerTitle: true,
         ),
         body: FutureBuilder(
-          future: GetData(),
+          future: getData(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               List data = snapshot.data as List;
