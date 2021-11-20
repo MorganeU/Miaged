@@ -13,23 +13,18 @@ class ShoppingBag extends StatefulWidget {
 class _ShoppingBagState extends State<ShoppingBag> {
   // Recuperer le panier
   Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>> getPanier() async {
-    QuerySnapshot<Map<String, dynamic>> res =
-        await FirebaseFirestore.instance.collection('users').get();
-    var users = res.docs;
-    print('panier : ');
-    users.forEach(
-        (user) => {print(user['name'] + ' : '), print(user['panier'])});
-    return users;
-  }
+    var user = await FirebaseFirestore.instance
+        .collection('users')
+        .doc('xnO8BxdHn3KeLUaPKeeQ')
+        .get();
+    var list_id = user['panier'];
 
-  // Recuperer les habits
-  Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>> getData() async {
-    QuerySnapshot<Map<String, dynamic>> res =
-        await FirebaseFirestore.instance.collection('clothes').get();
-    var clothes = res.docs;
-    print('clothes : ');
-    clothes.forEach((clothe) => {print(clothe['titre'])});
-    return clothes;
+    var items = await FirebaseFirestore.instance
+        .collection('clothes')
+        .where(FieldPath.documentId, whereIn: list_id)
+        .get();
+
+    return items.docs;
   }
 
   @override
@@ -45,20 +40,36 @@ class _ShoppingBagState extends State<ShoppingBag> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               List data = snapshot.data as List;
-              return ListView.builder(
-                  padding: const EdgeInsets.all(16),
-                  itemCount: data.length,
-                  itemBuilder: (BuildContext _context, int i) {
-                    return InkWell(
-                        child: ListTile(
-                            title: Column(
-                      children: [
-                        ElevatedButton(
-                            onPressed: suppPanier,
-                            child: const Text('Supprimer'))
-                      ],
-                    )));
-                  });
+              return Column(children: [
+                Expanded(
+                  child: ListView.builder(
+                      padding: const EdgeInsets.all(16),
+                      itemCount: data.length,
+                      itemBuilder: (BuildContext _context, int i) {
+                        return InkWell(
+                            child: ListTile(
+                                title: Column(
+                          children: [
+                            Text(data[i]['titre']),
+                            Text(data[i]['taille']),
+                            Text(data[i]['prix'].toString()),
+                            Image.network(data[i]['img'],
+                                height: 100, width: 100, fit: BoxFit.cover),
+                            ElevatedButton(
+                                onPressed: () => suppPanier(data[i].id),
+                                child: const Text('Supprimer')),
+                          ],
+                        )));
+                      }),
+                ),
+                Container(
+                    padding: const EdgeInsets.all(20),
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      getTotalPrix(data),
+                      style: const TextStyle(fontSize: 20),
+                    ))
+              ]);
             } else {
               return Center(child: CircularProgressIndicator());
             }
@@ -66,17 +77,25 @@ class _ShoppingBagState extends State<ShoppingBag> {
         ));
   }
 
-  void suppPanier() {
+  void suppPanier(id) {
     // à changer pcq c'est en dur
-    //   FirebaseFirestore.instance
-    //       .collection('users')
-    //       .doc('xnO8BxdHn3KeLUaPKeeQ')
-    //       .delete({
-    //     'panier': FieldValue.arrayUnion([widget.clothe.id])
-    //   }).then((value) => {
-    //             ScaffoldMessenger.of(context).showSnackBar(
-    //                 SnackBar(content: Text('article supprimé du panier')))
-    //           });
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc('xnO8BxdHn3KeLUaPKeeQ')
+        .update({
+      'panier': FieldValue.arrayRemove([id])
+    }).then((value) => {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('article supprimé du panier')))
+            });
+  }
+
+  String getTotalPrix(List articles) {
+    double total = 0;
+    articles.forEach((element) {
+      total += element['prix'];
+    });
+    return 'Total : $total €';
   }
 }
 

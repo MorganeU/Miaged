@@ -30,44 +30,46 @@ class _UserProfileState extends State<UserProfile> {
           automaticallyImplyLeading: false,
           centerTitle: true,
         ),
-        body: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              const TextField(
-                decoration: InputDecoration(labelText: "Nom"),
-              ),
-              const TextField(
-                decoration: InputDecoration(labelText: "Prenom"),
-              ),
-              const TextField(
-                decoration: InputDecoration(labelText: "Adresse email"),
-                keyboardType: TextInputType.emailAddress,
-              ),
-              const TextField(
-                decoration: InputDecoration(labelText: "Mot de passe"),
-                obscureText: true,
-              ),
-              const TextField(
-                decoration: InputDecoration(labelText: "Date de naissance"),
-              ),
-              const TextField(
-                decoration: InputDecoration(labelText: "Adresse du domicile"),
-              ),
-              const TextField(
-                decoration: InputDecoration(labelText: "Ville"),
-              ),
-              const TextField(
-                decoration: InputDecoration(labelText: "Code postal"),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Enregistrer les informations'),
+        body: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                const TextField(
+                  decoration: InputDecoration(labelText: "Nom"),
                 ),
-              ),
-            ],
+                const TextField(
+                  decoration: InputDecoration(labelText: "Prenom"),
+                ),
+                const TextField(
+                  decoration: InputDecoration(labelText: "Adresse email"),
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                const TextField(
+                  decoration: InputDecoration(labelText: "Mot de passe"),
+                  obscureText: true,
+                ),
+                const TextField(
+                  decoration: InputDecoration(labelText: "Date de naissance"),
+                ),
+                const TextField(
+                  decoration: InputDecoration(labelText: "Adresse du domicile"),
+                ),
+                const TextField(
+                  decoration: InputDecoration(labelText: "Ville"),
+                ),
+                const TextField(
+                  decoration: InputDecoration(labelText: "Code postal"),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: const Text('Enregistrer les informations'),
+                  ),
+                ),
+              ],
+            ),
           ),
         ));
   }
