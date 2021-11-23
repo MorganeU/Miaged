@@ -14,10 +14,10 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
-  static List<Widget> _widgetOptions = <Widget>[
-    ClothingList(),
-    ShoppingBag(),
-    UserProfile()
+  static final List<Widget> _widgetOptions = <Widget>[
+    const ClothingList(),
+    const ShoppingBag(),
+    const UserProfile(),
   ];
 
   @override
@@ -33,6 +33,12 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
               icon: Icon(Icons.account_circle_outlined), label: 'profil')
         ],
+        backgroundColor: const Color.fromRGBO(222, 177, 156, 1),
+        selectedItemColor: const Color.fromRGBO(99, 55, 44, 1),
+        unselectedItemColor: const Color.fromRGBO(97, 85, 80, 1),
+        elevation: 10,
+        selectedLabelStyle:
+            const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
       ),
       body: _widgetOptions[_selectedIndex],
     );

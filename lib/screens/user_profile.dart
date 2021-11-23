@@ -28,7 +28,9 @@ class _UserProfileState extends State<UserProfile> {
         title: const Text("Profil"),
         automaticallyImplyLeading: false,
         centerTitle: true,
+        backgroundColor: const Color.fromRGBO(99, 55, 44, 1),
       ),
+      backgroundColor: const Color.fromRGBO(242, 229, 215, 1),
       body: SingleChildScrollView(
           child: FutureBuilder(
         future: getUser(),
@@ -114,13 +116,15 @@ class _UserProfileState extends State<UserProfile> {
                     spacing: 10,
                     children: [
                       ElevatedButton(
-                        onPressed: () => saveInfo(userinfo),
-                        child: const Text('Enregistrer'),
-                      ),
+                          onPressed: () => saveInfo(userinfo),
+                          child: const Text('Enregistrer'),
+                          style: ElevatedButton.styleFrom(
+                              primary: const Color.fromRGBO(146, 182, 213, 1))),
                       ElevatedButton(
                           onPressed: logOut,
-                          child: const Text('Se déconnecter'),
-                          style: ElevatedButton.styleFrom(primary: Colors.red)),
+                          child: const Text('Déconnection'),
+                          style: ElevatedButton.styleFrom(
+                              primary: const Color.fromRGBO(245, 158, 112, 1))),
                     ],
                   )),
             ]);

@@ -34,7 +34,9 @@ class _ShoppingBagState extends State<ShoppingBag> {
           title: const Text("Panier"),
           automaticallyImplyLeading: false,
           centerTitle: true,
+          backgroundColor: const Color.fromRGBO(99, 55, 44, 1),
         ),
+        backgroundColor: const Color.fromRGBO(242, 229, 215, 1),
         body: FutureBuilder(
           future: getPanier(),
           builder: (context, snapshot) {

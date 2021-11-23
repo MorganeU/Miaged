@@ -16,7 +16,9 @@ class _ClothingDetailState extends State<ClothingDetail> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Détail"),
+        backgroundColor: const Color.fromRGBO(99, 55, 44, 1),
       ),
+      backgroundColor: const Color.fromRGBO(242, 229, 215, 1),
       body: Center(
         child: Column(children: [
           Text(widget.clothe['titre']),
@@ -29,7 +31,6 @@ class _ClothingDetailState extends State<ClothingDetail> {
               onPressed: ajoutPanier, child: const Text('Ajouter au panier'))
         ]),
       ),
-      backgroundColor: Colors.lightGreen[100],
     );
   }
 
