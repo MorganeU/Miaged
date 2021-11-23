@@ -16,19 +16,29 @@ class _ClothingDetailState extends State<ClothingDetail> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Détail"),
-        backgroundColor: const Color.fromRGBO(99, 55, 44, 1),
+        backgroundColor: const Color.fromRGBO(127, 129, 205, 1),
       ),
-      backgroundColor: const Color.fromRGBO(242, 229, 215, 1),
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       body: Center(
         child: Column(children: [
           Text(widget.clothe['titre']),
-          Text(widget.clothe['taille']),
-          Text(widget.clothe['marque']),
-          Text(widget.clothe['prix'].toString()),
+          Text("Taille : " + widget.clothe['taille']),
+          Text("Marque : " + widget.clothe['marque']),
+          Text("Prix : " + widget.clothe['prix'].toString() + " €"),
           Image.network(widget.clothe['img'],
               height: 100, width: 100, fit: BoxFit.cover),
           ElevatedButton(
-              onPressed: ajoutPanier, child: const Text('Ajouter au panier'))
+              onPressed: ajoutPanier,
+              child: const Text('Ajouter au panier'),
+              style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      const Color.fromRGBO(247, 173, 43, 1)),
+                  elevation: MaterialStateProperty.all<double>(2),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: Colors.yellow.shade800),
+                  )))),
         ]),
       ),
     );

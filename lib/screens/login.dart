@@ -12,10 +12,10 @@ class LoginPage extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: const Text('MIAGED'),
         centerTitle: true,
-        backgroundColor: const Color.fromRGBO(99, 55, 44, 1),
+        backgroundColor: const Color.fromRGBO(127, 129, 205, 1),
       ),
       body: const FonctionLogin(),
-      backgroundColor: const Color.fromRGBO(242, 229, 215, 1),
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
     );
   }
 }
@@ -51,7 +51,7 @@ class FonctionLoginState extends State<FonctionLogin> {
                         border: OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: Color.fromRGBO(222, 177, 156, 1)),
+                              color: Color.fromRGBO(255, 197, 74, 1)),
                           borderRadius: BorderRadius.all(Radius.circular(30.0)),
                         ),
                         filled: true,
@@ -70,7 +70,7 @@ class FonctionLoginState extends State<FonctionLogin> {
                         border: OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: Color.fromRGBO(222, 177, 156, 1)),
+                              color: Color.fromRGBO(255, 197, 74, 1)),
                           borderRadius: BorderRadius.all(Radius.circular(30.0)),
                         ),
                         filled: true,
@@ -86,8 +86,15 @@ class FonctionLoginState extends State<FonctionLogin> {
                   Navigator.of(context).pushNamed('/home');
                 },
                 child: const Text('Se connecter'),
-                style: ElevatedButton.styleFrom(
-                    primary: const Color.fromRGBO(201, 125, 96, 1))),
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromRGBO(247, 173, 43, 1)),
+                    elevation: MaterialStateProperty.all<double>(2),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: BorderSide(color: Colors.yellow.shade800),
+                    )))),
           ),
         ],
       ),

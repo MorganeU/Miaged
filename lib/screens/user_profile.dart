@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -25,12 +26,16 @@ class _UserProfileState extends State<UserProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Profil"),
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        backgroundColor: const Color.fromRGBO(99, 55, 44, 1),
-      ),
-      backgroundColor: const Color.fromRGBO(242, 229, 215, 1),
+          title: const Text("MIAGED"),
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          backgroundColor: const Color.fromRGBO(127, 129, 205, 1),
+          elevation: 7,
+          titleTextStyle: const TextStyle(
+            fontSize: 27,
+            fontWeight: FontWeight.w600,
+          )),
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       body: SingleChildScrollView(
           child: FutureBuilder(
         future: getUser(),
@@ -47,89 +52,228 @@ class _UserProfileState extends State<UserProfile> {
                 data['city'],
                 data['postcode']);
             return Column(children: [
-              TextFormField(
-                decoration: const InputDecoration(labelText: "Nom"),
-                initialValue: userinfo.lastname,
-                onChanged: (value) {
-                  userinfo.lastname = value;
-                },
-              ),
-              TextFormField(
-                decoration: const InputDecoration(labelText: "Prenom"),
-                initialValue: userinfo.name,
-                onChanged: (value) {
-                  userinfo.name = value;
-                },
-              ),
-              TextFormField(
-                decoration: const InputDecoration(labelText: "Adresse email"),
-                keyboardType: TextInputType.emailAddress,
-                initialValue: userinfo.email,
-                onChanged: (value) {
-                  userinfo.email = value;
-                },
-                enabled: false,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(labelText: "Mot de passe"),
-                obscureText: true,
-                initialValue: userinfo.mdp,
-                onChanged: (value) {
-                  userinfo.mdp = value;
-                },
-              ),
-              TextFormField(
-                decoration:
-                    const InputDecoration(labelText: "Date de naissance"),
-                initialValue: userinfo.birthday,
-                onChanged: (value) {
-                  userinfo.birthday = value;
-                },
-              ),
-              TextFormField(
-                decoration:
-                    const InputDecoration(labelText: "Adresse du domicile"),
-                initialValue: userinfo.adr,
-                onChanged: (value) {
-                  userinfo.adr = value;
-                },
-              ),
-              TextFormField(
-                decoration: const InputDecoration(labelText: "Ville"),
-                initialValue: userinfo.city,
-                onChanged: (value) {
-                  userinfo.city = value;
-                },
-              ),
-              TextFormField(
-                decoration: const InputDecoration(labelText: "Code postal"),
-                initialValue: userinfo.postcode,
-                onChanged: (value) {
-                  userinfo.postcode = value;
-                },
-              ),
+              Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                  child: Wrap(spacing: 10, runSpacing: 30, children: [
+                    Material(
+                        elevation: 2.0,
+                        shadowColor: const Color.fromRGBO(235, 215, 193, 1),
+                        color: Colors.transparent,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(30.0)),
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                              labelText: "Nom",
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Color.fromRGBO(255, 197, 74, 1)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30.0)))),
+                          initialValue: userinfo.lastname,
+                          onChanged: (value) {
+                            userinfo.lastname = value;
+                          },
+                        )),
+                    Material(
+                        elevation: 2.0,
+                        shadowColor: const Color.fromRGBO(235, 215, 193, 1),
+                        color: Colors.transparent,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(30.0)),
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                              labelText: "Prénom",
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Color.fromRGBO(255, 197, 74, 1)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30.0)))),
+                          initialValue: userinfo.name,
+                          onChanged: (value) {
+                            userinfo.name = value;
+                          },
+                        )),
+                    Material(
+                        elevation: 2.0,
+                        shadowColor: const Color.fromRGBO(235, 215, 193, 1),
+                        color: Colors.transparent,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(30.0)),
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                              labelText: "Adresse email",
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Color.fromRGBO(255, 197, 74, 1)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30.0)))),
+                          initialValue: userinfo.email,
+                          onChanged: (value) {
+                            userinfo.email = value;
+                          },
+                          enabled: false,
+                        )),
+                    Material(
+                        elevation: 2.0,
+                        shadowColor: const Color.fromRGBO(235, 215, 193, 1),
+                        color: Colors.transparent,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(30.0)),
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                              labelText: "Mot de passe",
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Color.fromRGBO(255, 197, 74, 1)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30.0)))),
+                          initialValue: userinfo.mdp,
+                          onChanged: (value) {
+                            userinfo.mdp = value;
+                          },
+                          obscureText: true,
+                        )),
+                    Material(
+                        elevation: 2.0,
+                        shadowColor: const Color.fromRGBO(235, 215, 193, 1),
+                        color: Colors.transparent,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(30.0)),
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                              labelText: "Date de naissance",
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Color.fromRGBO(255, 197, 74, 1)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30.0)))),
+                          initialValue: userinfo.birthday,
+                          onChanged: (value) {
+                            userinfo.birthday = value;
+                          },
+                        )),
+                    Material(
+                        elevation: 2.0,
+                        shadowColor: const Color.fromRGBO(235, 215, 193, 1),
+                        color: Colors.transparent,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(30.0)),
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                              labelText: "Adresse du domicile",
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Color.fromRGBO(255, 197, 74, 1)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30.0)))),
+                          initialValue: userinfo.adr,
+                          onChanged: (value) {
+                            userinfo.adr = value;
+                          },
+                        )),
+                    Material(
+                        elevation: 2.0,
+                        shadowColor: const Color.fromRGBO(235, 215, 193, 1),
+                        color: Colors.transparent,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(30.0)),
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                              labelText: "Ville",
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Color.fromRGBO(255, 197, 74, 1)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30.0)))),
+                          initialValue: userinfo.city,
+                          onChanged: (value) {
+                            userinfo.city = value;
+                          },
+                        )),
+                    Material(
+                        elevation: 2.0,
+                        shadowColor: const Color.fromRGBO(235, 215, 193, 1),
+                        color: Colors.transparent,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(30.0)),
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                              labelText: "Code postal",
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Color.fromRGBO(255, 197, 74, 1)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30.0)))),
+                          initialValue: userinfo.postcode,
+                          onChanged: (value) {
+                            userinfo.postcode = value;
+                          },
+                        )),
+                  ])),
               Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: Wrap(
-                    runSpacing: 10,
                     direction: Axis.horizontal,
-                    spacing: 10,
+                    spacing: 14,
                     children: [
                       ElevatedButton(
                           onPressed: () => saveInfo(userinfo),
                           child: const Text('Enregistrer'),
-                          style: ElevatedButton.styleFrom(
-                              primary: const Color.fromRGBO(146, 182, 213, 1))),
+                          autofocus: true,
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  const Color.fromRGBO(247, 173, 43, 1)),
+                              elevation: MaterialStateProperty.all<double>(2),
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                                side: BorderSide(color: Colors.yellow.shade800),
+                              )))),
                       ElevatedButton(
                           onPressed: logOut,
                           child: const Text('Déconnection'),
-                          style: ElevatedButton.styleFrom(
-                              primary: const Color.fromRGBO(245, 158, 112, 1))),
+                          autofocus: true,
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  const Color.fromRGBO(247, 87, 42, 1)),
+                              elevation: MaterialStateProperty.all<double>(2),
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                                side: const BorderSide(color: Colors.red),
+                              )))),
                     ],
                   )),
             ]);
           } else {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
         },
       )),
@@ -150,7 +294,7 @@ class _UserProfileState extends State<UserProfile> {
     });
 
     ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text('Profil mis à jour')));
+        .showSnackBar(const SnackBar(content: Text('Profil mis à jour')));
   }
 
   logOut() {

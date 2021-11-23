@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -31,12 +32,16 @@ class _ShoppingBagState extends State<ShoppingBag> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Panier"),
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          backgroundColor: const Color.fromRGBO(99, 55, 44, 1),
-        ),
-        backgroundColor: const Color.fromRGBO(242, 229, 215, 1),
+            title: const Text("MIAGED"),
+            automaticallyImplyLeading: false,
+            centerTitle: true,
+            backgroundColor: const Color.fromRGBO(127, 129, 205, 1),
+            elevation: 7,
+            titleTextStyle: const TextStyle(
+              fontSize: 27,
+              fontWeight: FontWeight.w600,
+            )),
+        backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
         body: FutureBuilder(
           future: getPanier(),
           builder: (context, snapshot) {
@@ -50,16 +55,42 @@ class _ShoppingBagState extends State<ShoppingBag> {
                       itemBuilder: (BuildContext _context, int i) {
                         return InkWell(
                             child: ListTile(
-                                title: Column(
+                                title: Row(
                           children: [
-                            Text(data[i]['titre']),
-                            Text(data[i]['taille']),
-                            Text(data[i]['prix'].toString()),
-                            Image.network(data[i]['img'],
-                                height: 100, width: 100, fit: BoxFit.cover),
-                            ElevatedButton(
-                                onPressed: () => suppPanier(data[i].id),
-                                child: const Text('Supprimer')),
+                            Wrap(children: [
+                              Image.network(data[i]['img'],
+                                  height: 100, width: 100, fit: BoxFit.cover),
+                            ]),
+                            Wrap(children: [
+                              Column(children: <Widget>[
+                                Text(data[i]['titre']),
+                                Text("Taille : " + data[i]['taille']),
+                                Text("Prix : " +
+                                    data[i]['prix'].toString() +
+                                    " €"),
+                                ElevatedButton.icon(
+                                    onPressed: () => suppPanier(data[i].id),
+                                    icon: const Icon(Icons.delete),
+                                    label: const Text(''),
+                                    // const Text('Supprimer'),
+                                    style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                const Color.fromRGBO(
+                                                    247, 87, 42, 1)),
+                                        elevation:
+                                            MaterialStateProperty.all<double>(
+                                                2),
+                                        shape: MaterialStateProperty.all<
+                                                RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18.0),
+                                          side: const BorderSide(
+                                              color: Colors.red),
+                                        ))))
+                              ])
+                            ]),
                           ],
                         )));
                       }),

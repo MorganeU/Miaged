@@ -33,9 +33,9 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
               icon: Icon(Icons.account_circle_outlined), label: 'profil')
         ],
-        backgroundColor: const Color.fromRGBO(222, 177, 156, 1),
-        selectedItemColor: const Color.fromRGBO(99, 55, 44, 1),
-        unselectedItemColor: const Color.fromRGBO(97, 85, 80, 1),
+        backgroundColor: const Color.fromRGBO(0, 29, 102, 1),
+        selectedItemColor: const Color.fromRGBO(255, 197, 74, 1),
+        unselectedItemColor: const Color.fromRGBO(127, 129, 205, 1),
         elevation: 10,
         selectedLabelStyle:
             const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),

@@ -24,12 +24,16 @@ class _ClothingListState extends State<ClothingList> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Liste de vêtements"),
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          backgroundColor: const Color.fromRGBO(99, 55, 44, 1),
-        ),
-        backgroundColor: const Color.fromRGBO(242, 229, 215, 1),
+            title: const Text("MIAGED"),
+            automaticallyImplyLeading: false,
+            centerTitle: true,
+            backgroundColor: const Color.fromRGBO(127, 129, 205, 1),
+            elevation: 7,
+            titleTextStyle: const TextStyle(
+              fontSize: 27,
+              fontWeight: FontWeight.w600,
+            )),
+        backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
         body: FutureBuilder(
           future: getData(),
           builder: (context, snapshot) {
