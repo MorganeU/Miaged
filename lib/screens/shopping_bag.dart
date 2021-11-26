@@ -1,7 +1,7 @@
-import 'dart:ffi';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:miaged/globals.dart' as globals;
 
 // QUATRIEME PAGE : SHOPPING BAG -----------------------------------------------
 
@@ -16,7 +16,7 @@ class _ShoppingBagState extends State<ShoppingBag> {
   Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>> getPanier() async {
     var user = await FirebaseFirestore.instance
         .collection('users')
-        .doc('xnO8BxdHn3KeLUaPKeeQ')
+        .doc(globals.user?.uid)
         .get();
     var list_id = user['panier'];
 
@@ -45,8 +45,11 @@ class _ShoppingBagState extends State<ShoppingBag> {
         body: FutureBuilder(
           future: getPanier(),
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              List data = snapshot.data as List;
+            if (snapshot.connectionState == ConnectionState.done) {
+              List data = [];
+              if (snapshot.data != null) {
+                data = snapshot.data as List;
+              }
               return Column(children: [
                 Expanded(
                   child: ListView.builder(
@@ -57,40 +60,35 @@ class _ShoppingBagState extends State<ShoppingBag> {
                             child: ListTile(
                                 title: Row(
                           children: [
-                            Wrap(children: [
-                              Image.network(data[i]['img'],
-                                  height: 100, width: 100, fit: BoxFit.cover),
-                            ]),
-                            Wrap(children: [
-                              Column(children: <Widget>[
-                                Text(data[i]['titre']),
-                                Text("Taille : " + data[i]['taille']),
-                                Text("Prix : " +
-                                    data[i]['prix'].toString() +
-                                    " €"),
-                                ElevatedButton.icon(
-                                    onPressed: () => suppPanier(data[i].id),
-                                    icon: const Icon(Icons.delete),
-                                    label: const Text(''),
-                                    // const Text('Supprimer'),
-                                    style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all<Color>(
-                                                const Color.fromRGBO(
-                                                    247, 87, 42, 1)),
-                                        elevation:
-                                            MaterialStateProperty.all<double>(
-                                                2),
-                                        shape: MaterialStateProperty.all<
-                                                RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(18.0),
-                                          side: const BorderSide(
-                                              color: Colors.red),
-                                        ))))
-                              ])
-                            ]),
+                            Image.network(data[i]['img'],
+                                height: 100, width: 100, fit: BoxFit.cover),
+                            Column(children: <Widget>[
+                              Text(data[i]['titre']),
+                              Text("Taille : " + data[i]['taille']),
+                              Text("Prix : " +
+                                  data[i]['prix'].toString() +
+                                  " €"),
+                              ElevatedButton.icon(
+                                  onPressed: () => suppPanier(data[i].id),
+                                  icon: const Icon(Icons.delete),
+                                  label: const Text(''),
+                                  // const Text('Supprimer'),
+                                  style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              const Color.fromRGBO(
+                                                  247, 87, 42, 1)),
+                                      elevation:
+                                          MaterialStateProperty.all<double>(2),
+                                      shape: MaterialStateProperty.all<
+                                              RoundedRectangleBorder>(
+                                          RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(18.0),
+                                        side:
+                                            const BorderSide(color: Colors.red),
+                                      ))))
+                            ])
                           ],
                         )));
                       }),
@@ -104,23 +102,23 @@ class _ShoppingBagState extends State<ShoppingBag> {
                     ))
               ]);
             } else {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
           },
         ));
   }
 
-  void suppPanier(id) {
+  void suppPanier(id) async {
     // à changer pcq c'est en dur
-    FirebaseFirestore.instance
+    await FirebaseFirestore.instance
         .collection('users')
-        .doc('xnO8BxdHn3KeLUaPKeeQ')
+        .doc(globals.user?.uid)
         .update({
       'panier': FieldValue.arrayRemove([id])
-    }).then((value) => {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('article supprimé du panier')))
-            });
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('article supprimé du panier')));
+    setState(() {});
   }
 
   String getTotalPrix(List articles) {

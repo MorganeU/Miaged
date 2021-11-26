@@ -1,10 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-// import 'package:miaged/screens/clothing_detail.dart';
 import 'package:miaged/screens/home.dart';
 import 'package:miaged/screens/login.dart';
-// import 'package:miaged/screens/shopping_bag.dart';
-// import 'package:miaged/screens/user_profile.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +14,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Welcome to Flutter',
+      theme: ThemeData(
+          colorScheme: const ColorScheme.light(
+            primary: Color.fromRGBO(255, 197, 74, 1),
+          ),
+          errorColor: const Color.fromRGBO(247, 87, 42, 1)),
       debugShowCheckedModeBanner: false,
       home: LoginPage(),
       // ROUTING

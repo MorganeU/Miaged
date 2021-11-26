@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:miaged/globals.dart' as globals;
 
 // CINQUIEME PAGE : USER PROFILE -----------------------------------------------
 
@@ -14,9 +16,12 @@ class UserProfile extends StatefulWidget {
 class _UserProfileState extends State<UserProfile> {
   // Recuperer les infos utilisateur
   Future<DocumentSnapshot<Map<String, dynamic>>> getUser() async {
+    print('globals.user?.uid');
+    print(globals.user?.uid);
+
     var user = await FirebaseFirestore.instance
         .collection('users')
-        .doc('xnO8BxdHn3KeLUaPKeeQ')
+        .doc(globals.user?.uid)
         .get();
     return user;
   }
@@ -45,8 +50,8 @@ class _UserProfileState extends State<UserProfile> {
             UserInfo userinfo = UserInfo(
                 data['lastname'],
                 data['name'],
-                data['email'],
-                data['mdp'],
+                globals.user?.email ?? '',
+                '',
                 data['birthday'],
                 data['adr'],
                 data['city'],
@@ -64,15 +69,23 @@ class _UserProfileState extends State<UserProfile> {
                             const BorderRadius.all(Radius.circular(30.0)),
                         child: TextFormField(
                           decoration: const InputDecoration(
-                              labelText: "Nom",
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Color.fromRGBO(255, 197, 74, 1)),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30.0)))),
+                            labelText: "Nom",
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color.fromRGBO(255, 197, 74, 1)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0))),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromRGBO(255, 197, 74, 1),
+                                  width: 2),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30.0)),
+                            ),
+                          ),
                           initialValue: userinfo.lastname,
                           onChanged: (value) {
                             userinfo.lastname = value;
@@ -86,15 +99,23 @@ class _UserProfileState extends State<UserProfile> {
                             const BorderRadius.all(Radius.circular(30.0)),
                         child: TextFormField(
                           decoration: const InputDecoration(
-                              labelText: "Prénom",
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Color.fromRGBO(255, 197, 74, 1)),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30.0)))),
+                            labelText: "Prénom",
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color.fromRGBO(255, 197, 74, 1)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0))),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromRGBO(255, 197, 74, 1),
+                                  width: 2),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30.0)),
+                            ),
+                          ),
                           initialValue: userinfo.name,
                           onChanged: (value) {
                             userinfo.name = value;
@@ -112,9 +133,9 @@ class _UserProfileState extends State<UserProfile> {
                               filled: true,
                               fillColor: Colors.white,
                               border: OutlineInputBorder(),
-                              enabledBorder: OutlineInputBorder(
+                              disabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Color.fromRGBO(255, 197, 74, 1)),
+                                      color: Color.fromRGBO(216, 216, 216, 1)),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(30.0)))),
                           initialValue: userinfo.email,
@@ -131,15 +152,23 @@ class _UserProfileState extends State<UserProfile> {
                             const BorderRadius.all(Radius.circular(30.0)),
                         child: TextFormField(
                           decoration: const InputDecoration(
-                              labelText: "Mot de passe",
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Color.fromRGBO(255, 197, 74, 1)),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30.0)))),
+                            labelText: "Mot de passe",
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color.fromRGBO(255, 197, 74, 1)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0))),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromRGBO(255, 197, 74, 1),
+                                  width: 2),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30.0)),
+                            ),
+                          ),
                           initialValue: userinfo.mdp,
                           onChanged: (value) {
                             userinfo.mdp = value;
@@ -154,15 +183,23 @@ class _UserProfileState extends State<UserProfile> {
                             const BorderRadius.all(Radius.circular(30.0)),
                         child: TextFormField(
                           decoration: const InputDecoration(
-                              labelText: "Date de naissance",
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Color.fromRGBO(255, 197, 74, 1)),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30.0)))),
+                            labelText: "Date de naissance",
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color.fromRGBO(255, 197, 74, 1)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0))),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromRGBO(255, 197, 74, 1),
+                                  width: 2),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30.0)),
+                            ),
+                          ),
                           initialValue: userinfo.birthday,
                           onChanged: (value) {
                             userinfo.birthday = value;
@@ -176,15 +213,23 @@ class _UserProfileState extends State<UserProfile> {
                             const BorderRadius.all(Radius.circular(30.0)),
                         child: TextFormField(
                           decoration: const InputDecoration(
-                              labelText: "Adresse du domicile",
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Color.fromRGBO(255, 197, 74, 1)),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30.0)))),
+                            labelText: "Adresse du domicile",
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color.fromRGBO(255, 197, 74, 1)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0))),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromRGBO(255, 197, 74, 1),
+                                  width: 2),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30.0)),
+                            ),
+                          ),
                           initialValue: userinfo.adr,
                           onChanged: (value) {
                             userinfo.adr = value;
@@ -198,15 +243,23 @@ class _UserProfileState extends State<UserProfile> {
                             const BorderRadius.all(Radius.circular(30.0)),
                         child: TextFormField(
                           decoration: const InputDecoration(
-                              labelText: "Ville",
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Color.fromRGBO(255, 197, 74, 1)),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30.0)))),
+                            labelText: "Ville",
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color.fromRGBO(255, 197, 74, 1)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0))),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromRGBO(255, 197, 74, 1),
+                                  width: 2),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30.0)),
+                            ),
+                          ),
                           initialValue: userinfo.city,
                           onChanged: (value) {
                             userinfo.city = value;
@@ -220,15 +273,23 @@ class _UserProfileState extends State<UserProfile> {
                             const BorderRadius.all(Radius.circular(30.0)),
                         child: TextFormField(
                           decoration: const InputDecoration(
-                              labelText: "Code postal",
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(),
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Color.fromRGBO(255, 197, 74, 1)),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30.0)))),
+                            labelText: "Code postal",
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color.fromRGBO(255, 197, 74, 1)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0))),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromRGBO(255, 197, 74, 1),
+                                  width: 2),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30.0)),
+                            ),
+                          ),
                           initialValue: userinfo.postcode,
                           onChanged: (value) {
                             userinfo.postcode = value;
@@ -283,7 +344,7 @@ class _UserProfileState extends State<UserProfile> {
   saveInfo(UserInfo userinfo) async {
     var user = await FirebaseFirestore.instance
         .collection('users')
-        .doc('xnO8BxdHn3KeLUaPKeeQ')
+        .doc(globals.user?.uid)
         .update({
       'lastname': userinfo.lastname,
       'name': userinfo.name,
@@ -292,12 +353,16 @@ class _UserProfileState extends State<UserProfile> {
       'city': userinfo.city,
       'postcode': userinfo.postcode
     });
-
+    if (userinfo.mdp != '') {
+      await globals.user?.updatePassword(userinfo.mdp);
+    }
     ScaffoldMessenger.of(context)
         .showSnackBar(const SnackBar(content: Text('Profil mis à jour')));
   }
 
   logOut() {
+    FirebaseAuth.instance.signOut();
+    globals.user = null;
     Navigator.pushReplacementNamed(context, '/login');
   }
 }

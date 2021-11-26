@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:miaged/globals.dart' as globals;
 
 // TROISIEME PAGE : CLOTHING DETAIL --------------------------------------------
 
@@ -48,7 +49,7 @@ class _ClothingDetailState extends State<ClothingDetail> {
     // à changer pcq c'est en dur
     FirebaseFirestore.instance
         .collection('users')
-        .doc('xnO8BxdHn3KeLUaPKeeQ')
+        .doc(globals.user?.uid)
         .update({
       'panier': FieldValue.arrayUnion([widget.clothe.id])
     }).then((value) => {

@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:miaged/globals.dart' as globals;
 
 // login : test@gmail.com
 // mdp : coucou
@@ -30,6 +32,9 @@ class FonctionLogin extends StatefulWidget {
 
 class FonctionLoginState extends State<FonctionLogin> {
   final _formKey = GlobalKey<FormState>();
+  String _login = '';
+  String _password = '';
+
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -39,35 +44,50 @@ class FonctionLoginState extends State<FonctionLogin> {
         children: [
           Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-              child: Wrap(spacing: 10, runSpacing: 30, children: const [
+              child: Wrap(spacing: 10, runSpacing: 30, children: [
                 Material(
-                    elevation: 5.0,
-                    shadowColor: Color.fromRGBO(235, 215, 193, 1),
+                    // elevation: 5.0,
+                    shadowColor: const Color.fromRGBO(235, 215, 193, 1),
                     color: Colors.transparent,
-                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                    child: TextField(
-                      decoration: InputDecoration(
+                    // borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
                         labelText: "Login",
-                        border: OutlineInputBorder(),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Color.fromRGBO(255, 197, 74, 1)),
+                          borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                        ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: Color.fromRGBO(255, 197, 74, 1)),
                           borderRadius: BorderRadius.all(Radius.circular(30.0)),
                         ),
-                        filled: true,
+                        // filled: true,
                         fillColor: Colors.white,
                       ),
                       keyboardType: TextInputType.emailAddress,
+                      validator: (value) {
+                        if (value == '') {
+                          return 'Veuillez préciser votre adresse email';
+                        } else {
+                          _login = value.toString();
+                        }
+                      },
                     )),
                 Material(
-                    elevation: 5.0,
-                    shadowColor: Color.fromRGBO(235, 215, 193, 1),
+                    // elevation: 5.0,
+                    shadowColor: const Color.fromRGBO(235, 215, 193, 1),
                     color: Colors.transparent,
-                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                    child: TextField(
-                      decoration: InputDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(30.0)),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
                         labelText: "Mot de passe",
-                        border: OutlineInputBorder(),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Color.fromRGBO(255, 197, 74, 1)),
+                          borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                        ),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                               color: Color.fromRGBO(255, 197, 74, 1)),
@@ -77,13 +97,21 @@ class FonctionLoginState extends State<FonctionLogin> {
                         fillColor: Colors.white,
                       ),
                       obscureText: true,
+                      validator: (value) {
+                        if (value == '') {
+                          return 'Veuillez préciser votre mot de passe';
+                        } else {
+                          _password = value.toString();
+                        }
+                      },
                     ))
               ])),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 6.0),
             child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/home');
+                  // Navigator.of(context).pushNamed('/home');
+                  authentification();
                 },
                 child: const Text('Se connecter'),
                 style: ButtonStyle(
@@ -99,5 +127,19 @@ class FonctionLoginState extends State<FonctionLogin> {
         ],
       ),
     );
+  }
+
+  void authentification() async {
+    bool isFilled = _formKey.currentState!.validate();
+    if (!isFilled) return;
+    try {
+      UserCredential userCred = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: _login, password: _password);
+      globals.user = userCred.user!;
+      Navigator.of(context).pushNamed('/home');
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Une erreur est survenue')));
+    }
   }
 }
