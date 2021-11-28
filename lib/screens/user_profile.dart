@@ -69,6 +69,60 @@ class _UserProfileState extends State<UserProfile> {
                             const BorderRadius.all(Radius.circular(30.0)),
                         child: TextFormField(
                           decoration: const InputDecoration(
+                              labelText: "Adresse email",
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(),
+                              disabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Color.fromRGBO(216, 216, 216, 1)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30.0)))),
+                          initialValue: userinfo.email,
+                          onChanged: (value) {
+                            userinfo.email = value;
+                          },
+                          enabled: false,
+                        )),
+                    Material(
+                        elevation: 2.0,
+                        shadowColor: const Color.fromRGBO(235, 215, 193, 1),
+                        color: Colors.transparent,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(30.0)),
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: "Mot de passe",
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color.fromRGBO(255, 197, 74, 1)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0))),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Color.fromRGBO(255, 197, 74, 1),
+                                  width: 2),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30.0)),
+                            ),
+                          ),
+                          initialValue: userinfo.mdp,
+                          onChanged: (value) {
+                            userinfo.mdp = value;
+                          },
+                          obscureText: true,
+                        )),
+                    Material(
+                        elevation: 2.0,
+                        shadowColor: const Color.fromRGBO(235, 215, 193, 1),
+                        color: Colors.transparent,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(30.0)),
+                        child: TextFormField(
+                          decoration: const InputDecoration(
                             labelText: "Nom",
                             filled: true,
                             fillColor: Colors.white,
@@ -120,60 +174,6 @@ class _UserProfileState extends State<UserProfile> {
                           onChanged: (value) {
                             userinfo.name = value;
                           },
-                        )),
-                    Material(
-                        elevation: 2.0,
-                        shadowColor: const Color.fromRGBO(235, 215, 193, 1),
-                        color: Colors.transparent,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(30.0)),
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                              labelText: "Adresse email",
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(),
-                              disabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Color.fromRGBO(216, 216, 216, 1)),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30.0)))),
-                          initialValue: userinfo.email,
-                          onChanged: (value) {
-                            userinfo.email = value;
-                          },
-                          enabled: false,
-                        )),
-                    Material(
-                        elevation: 2.0,
-                        shadowColor: const Color.fromRGBO(235, 215, 193, 1),
-                        color: Colors.transparent,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(30.0)),
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                            labelText: "Mot de passe",
-                            filled: true,
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Color.fromRGBO(255, 197, 74, 1)),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30.0))),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: Color.fromRGBO(255, 197, 74, 1),
-                                  width: 2),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(30.0)),
-                            ),
-                          ),
-                          initialValue: userinfo.mdp,
-                          onChanged: (value) {
-                            userinfo.mdp = value;
-                          },
-                          obscureText: true,
                         )),
                     Material(
                         elevation: 2.0,

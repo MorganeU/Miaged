@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:miaged/globals.dart' as globals;
 
+import 'clothing_detail.dart';
+
 // QUATRIEME PAGE : SHOPPING BAG -----------------------------------------------
 
 class ShoppingBag extends StatefulWidget {
@@ -57,40 +59,78 @@ class _ShoppingBagState extends State<ShoppingBag> {
                       itemCount: data.length,
                       itemBuilder: (BuildContext _context, int i) {
                         return InkWell(
+                            onTap: () => {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ClothingDetail(clothe: data[i])))
+                                },
                             child: ListTile(
                                 title: Row(
-                          children: [
-                            Image.network(data[i]['img'],
-                                height: 100, width: 100, fit: BoxFit.cover),
-                            Column(children: <Widget>[
-                              Text(data[i]['titre']),
-                              Text("Taille : " + data[i]['taille']),
-                              Text("Prix : " +
-                                  data[i]['prix'].toString() +
-                                  " €"),
-                              ElevatedButton.icon(
-                                  onPressed: () => suppPanier(data[i].id),
-                                  icon: const Icon(Icons.delete),
-                                  label: const Text(''),
-                                  // const Text('Supprimer'),
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all<Color>(
-                                              const Color.fromRGBO(
-                                                  247, 87, 42, 1)),
-                                      elevation:
-                                          MaterialStateProperty.all<double>(2),
-                                      shape: MaterialStateProperty.all<
-                                              RoundedRectangleBorder>(
-                                          RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(18.0),
-                                        side:
-                                            const BorderSide(color: Colors.red),
-                                      ))))
-                            ])
-                          ],
-                        )));
+                              children: [
+                                Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
+                                    child: Image.network(data[i]['img'],
+                                        height: 70,
+                                        width: 70,
+                                        fit: BoxFit.cover)),
+                                Expanded(
+                                    child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 20, right: 30),
+                                        child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 10),
+                                                  child: Text(
+                                                    data[i]['titre'],
+                                                    style: const TextStyle(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                    textAlign: TextAlign.left,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  )),
+                                              Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 4),
+                                                  child: Text(
+                                                    "Taille : " +
+                                                        data[i]['taille'],
+                                                    style: const TextStyle(
+                                                        fontSize: 13),
+                                                    textAlign: TextAlign.right,
+                                                  )),
+                                              Text(
+                                                "Prix : " +
+                                                    data[i]['prix'].toString() +
+                                                    " €",
+                                                style: const TextStyle(
+                                                    fontSize: 13),
+                                                textAlign: TextAlign.right,
+                                              ),
+                                            ]))),
+                                Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: IconButton(
+                                      onPressed: () => suppPanier(data[i].id),
+                                      icon: const Icon(Icons.delete),
+                                      splashRadius: 20,
+                                      splashColor: const Color.fromRGBO(
+                                          216, 216, 216, 1),
+                                      color:
+                                          const Color.fromRGBO(247, 87, 42, 1),
+                                    ))
+                              ],
+                            )));
                       }),
                 ),
                 Container(
