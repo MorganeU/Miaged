@@ -14,35 +14,36 @@ class ClothingDetail extends StatefulWidget {
 class _ClothingDetailState extends State<ClothingDetail> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Détail"),
-        backgroundColor: const Color.fromRGBO(127, 129, 205, 1),
-      ),
-      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-      body: Center(
-        child: Column(children: [
-          Text(widget.clothe['titre']),
-          Text("Taille : " + widget.clothe['taille']),
-          Text("Marque : " + widget.clothe['marque']),
-          Text("Prix : " + widget.clothe['prix'].toString() + " €"),
-          Image.network(widget.clothe['img'],
-              height: 100, width: 100, fit: BoxFit.cover),
-          ElevatedButton(
-              onPressed: ajoutPanier,
-              child: const Text('Ajouter au panier'),
-              style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                      const Color.fromRGBO(247, 173, 43, 1)),
-                  elevation: MaterialStateProperty.all<double>(2),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.yellow.shade800),
-                  )))),
-        ]),
-      ),
-    );
+    return 
+         Scaffold(
+          appBar: AppBar(
+            title: const Text("Détail"),
+            backgroundColor: const Color.fromRGBO(127, 129, 205, 1),
+          ),
+          backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
+          body: Center(
+            child: Column(children: [
+              Text(widget.clothe['titre']),
+              Text("Taille : " + widget.clothe['taille']),
+              Text("Marque : " + widget.clothe['marque']),
+              Text("Prix : " + widget.clothe['prix'].toString() + " €"),
+              Image.network(widget.clothe['img'],
+                  height: 100, width: 100, fit: BoxFit.cover),
+              ElevatedButton(
+                  onPressed: ajoutPanier,
+                  child: const Text('Ajouter au panier'),
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          const Color.fromRGBO(247, 173, 43, 1)),
+                      elevation: MaterialStateProperty.all<double>(2),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.yellow.shade800),
+                      )))),
+            ]),
+          ),
+        );
   }
 
   ajoutPanier() {
@@ -54,7 +55,7 @@ class _ClothingDetailState extends State<ClothingDetail> {
       'panier': FieldValue.arrayUnion([widget.clothe.id])
     }).then((value) => {
               ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('article ajouté au panier')))
+                  const SnackBar(content: Text('article ajouté au panier')))
             });
   }
 }
