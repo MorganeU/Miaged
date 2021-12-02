@@ -25,13 +25,32 @@ class _ClothingDetailState extends State<ClothingDetail> {
             expandedHeight: 300.0,
             backgroundColor: const Color.fromRGBO(127, 129, 205, 1),
             flexibleSpace: FlexibleSpaceBar(
-              title: Text(widget.clothe['titre'],
-                  style: const TextStyle(
-                    overflow: TextOverflow.ellipsis,
-                  )),
-              background: Image.network(widget.clothe['img'],
-                  height: 100, width: 100, fit: BoxFit.cover),
-            ),
+                title: Text(widget.clothe['titre'],
+                    style: const TextStyle(
+                      overflow: TextOverflow.ellipsis,
+                    )),
+                background: InkWell(
+                  onTap: () {
+                    showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        builder: (_) {
+                          return Container(
+                            child: InteractiveViewer(
+                              child: Image.network(widget.clothe['img'],
+                                  fit: BoxFit.contain),
+                              panEnabled: false,
+                              minScale: 0.5,
+                              maxScale: 4,
+                            ),
+                            color: Colors.black,
+                            height: double.infinity,
+                          );
+                        });
+                  },
+                  child: Image.network(widget.clothe['img'],
+                      height: 100, width: 100, fit: BoxFit.cover),
+                )),
           ),
           SliverToBoxAdapter(
             child: Container(
