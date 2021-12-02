@@ -23,7 +23,6 @@ class _UserProfileState extends State<UserProfile> {
     return user;
   }
 
-  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -437,6 +436,7 @@ class _UserProfileState extends State<UserProfile> {
   }
 
   saveInfo(UserInfo userinfo) async {
+    // ignore: unused_local_variable
     var user = await FirebaseFirestore.instance
         .collection('users')
         .doc(globals.user?.uid)
@@ -475,20 +475,3 @@ class UserInfo {
   UserInfo(this.lastname, this.name, this.email, this.mdp, this.birthday,
       this.adr, this.city, this.postcode);
 }
-
-
-// class UserProfile extends StatelessWidget {
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text("Profil"),
-//         automaticallyImplyLeading: false,
-//         centerTitle: true,
-//       ),
-//       body: const Center(
-//         child: Text('liste'),
-//       ),
-//       backgroundColor: Colors.lightGreen[100],
-//     );
-//   }
-// }

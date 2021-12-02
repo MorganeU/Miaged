@@ -7,15 +7,21 @@ import 'package:miaged/globals.dart' as globals;
 
 // PREMIERE PAGE : LOGIN PAGE --------------------------------------------------
 class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text('MIAGED'),
-        centerTitle: true,
-        backgroundColor: const Color.fromRGBO(127, 129, 205, 1),
-      ),
+          title: const Text("MIAGED"),
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          backgroundColor: const Color.fromRGBO(127, 129, 205, 1),
+          elevation: 7,
+          titleTextStyle: const TextStyle(
+            fontSize: 27,
+            fontWeight: FontWeight.w600,
+          )),
       body: const FonctionLogin(),
       backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
     );
@@ -37,7 +43,6 @@ class FonctionLoginState extends State<FonctionLogin> {
 
   @override
   Widget build(BuildContext context) {
-    // Build a Form widget using the _formKey created above.
     return Form(
       key: _formKey,
       child: Column(
@@ -46,10 +51,8 @@ class FonctionLoginState extends State<FonctionLogin> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
               child: Wrap(spacing: 10, runSpacing: 30, children: [
                 Material(
-                    // elevation: 5.0,
                     shadowColor: const Color.fromRGBO(235, 215, 193, 1),
                     color: Colors.transparent,
-                    // borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                     child: TextFormField(
                       decoration: const InputDecoration(
                         labelText: "Login",
@@ -63,7 +66,6 @@ class FonctionLoginState extends State<FonctionLogin> {
                               color: Color.fromRGBO(255, 197, 74, 1)),
                           borderRadius: BorderRadius.all(Radius.circular(30.0)),
                         ),
-                        // filled: true,
                         fillColor: Colors.white,
                       ),
                       keyboardType: TextInputType.emailAddress,
@@ -76,7 +78,6 @@ class FonctionLoginState extends State<FonctionLogin> {
                       },
                     )),
                 Material(
-                    // elevation: 5.0,
                     shadowColor: const Color.fromRGBO(235, 215, 193, 1),
                     color: Colors.transparent,
                     borderRadius: const BorderRadius.all(Radius.circular(30.0)),

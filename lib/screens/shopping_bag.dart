@@ -20,11 +20,11 @@ class _ShoppingBagState extends State<ShoppingBag> {
         .collection('users')
         .doc(globals.user?.uid)
         .get();
-    var list_id = user['panier'];
+    var listId = user['panier'];
 
     var items = await FirebaseFirestore.instance
         .collection('clothes')
-        .where(FieldPath.documentId, whereIn: list_id)
+        .where(FieldPath.documentId, whereIn: listId)
         .get();
 
     return items.docs;
@@ -163,26 +163,9 @@ class _ShoppingBagState extends State<ShoppingBag> {
 
   String getTotalPrix(List articles) {
     double total = 0;
-    articles.forEach((element) {
+    for (var element in articles) {
       total += element['prix'];
-    });
+    }
     return 'Total : $total €';
   }
 }
-
-
-// class ShoppingBag extends StatelessWidget {
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text("Panier"),
-//         automaticallyImplyLeading: false,
-//         centerTitle: true,
-//       ),
-//       body: const Center(
-//         child: Text('liste'),
-//       ),
-//       backgroundColor: Colors.lightGreen[100],
-//     );
-//   }
-// }

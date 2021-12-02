@@ -17,6 +17,7 @@ class _ClothingListState extends State<ClothingList> {
         await FirebaseFirestore.instance.collection('clothes').get();
     var clothes = res.docs;
     List<QueryDocumentSnapshot<Map<String, dynamic>>> filteredClothes = [];
+    // ignore: avoid_function_literals_in_foreach_calls
     clothes.forEach((clothe) => {
           if (categorie == 'Tous' || categorie == clothe['categorie'])
             {filteredClothes.add(clothe)}
@@ -89,7 +90,7 @@ class _ClothingListState extends State<ClothingList> {
                     )));
               });
         } else {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
       },
     );
