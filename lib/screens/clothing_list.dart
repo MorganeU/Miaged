@@ -66,29 +66,45 @@ class _ClothingListState extends State<ClothingList> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List data = snapshot.data as List;
-          return ListView.builder(
-              padding: const EdgeInsets.all(16),
-              itemCount: data.length,
-              itemBuilder: (BuildContext _context, int i) {
-                return InkWell(
-                    onTap: () => {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      ClothingDetail(clothe: data[i])))
-                        },
-                    child: ListTile(
-                        title: Column(
-                      children: [
-                        Text(data[i]['titre']),
-                        Text(data[i]['taille']),
-                        Text(data[i]['prix'].toString()),
-                        Image.network(data[i]['img'],
-                            height: 100, width: 100, fit: BoxFit.cover)
-                      ],
-                    )));
-              });
+          return Padding(
+              padding: const EdgeInsets.all(15),
+              child: GridView.count(
+                  childAspectRatio: 0.70,
+                  crossAxisCount: 2,
+                  children: data
+                      .map((item) => Padding(
+                          padding: const EdgeInsets.only(
+                              left: 3, right: 3, top: 2, bottom: 2),
+                          child: Card(
+                              elevation: 3,
+                              child: InkWell(
+                                  onTap: () => {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ClothingDetail(
+                                                        clothe: item)))
+                                      },
+                                  child: ListTile(
+                                      title: Column(
+                                    children: [
+                                      Padding(
+                                          padding:
+                                              const EdgeInsets.only(bottom: 8),
+                                          child: Image.network(item['img'],
+                                              height: 150,
+                                              width: 150,
+                                              fit: BoxFit.cover)),
+                                      Text(
+                                        item['titre'],
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      Text('Taille : ' + item['taille']),
+                                      Text(item['prix'].toString() + ' €'),
+                                    ],
+                                  ))))))
+                      .toList()));
         } else {
           return const Center(child: CircularProgressIndicator());
         }
