@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:miaged/globals.dart' as globals;
 
 import 'clothing_detail.dart';
@@ -34,14 +35,13 @@ class _ShoppingBagState extends State<ShoppingBag> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: const Text("MIAGED"),
+            title: Text("MIAGED", style: GoogleFonts.aclonica()),
             automaticallyImplyLeading: false,
             centerTitle: true,
             backgroundColor: const Color.fromRGBO(127, 129, 205, 1),
             elevation: 7,
             titleTextStyle: const TextStyle(
               fontSize: 27,
-              fontWeight: FontWeight.w600,
             )),
         backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
         body: FutureBuilder(

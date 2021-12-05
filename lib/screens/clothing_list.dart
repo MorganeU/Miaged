@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:miaged/screens/clothing_detail.dart';
 
 // DEUXIEME PAGE : CLOTHING LIST -----------------------------------------------
@@ -31,14 +32,13 @@ class _ClothingListState extends State<ClothingList> {
         length: 4,
         child: Scaffold(
             appBar: AppBar(
-              title: const Text("MIAGED"),
+              title:  Text("MIAGED", style: GoogleFonts.aclonica()),
               automaticallyImplyLeading: false,
               centerTitle: true,
               backgroundColor: const Color.fromRGBO(127, 129, 205, 1),
               elevation: 7,
               titleTextStyle: const TextStyle(
                 fontSize: 27,
-                fontWeight: FontWeight.w600,
               ),
               bottom: const TabBar(
                 tabs: [

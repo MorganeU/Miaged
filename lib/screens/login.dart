@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:miaged/globals.dart' as globals;
 
 // login : test@gmail.com
@@ -13,14 +15,13 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text("MIAGED"),
+          title: Text("MIAGED", style: GoogleFonts.aclonica()),
           automaticallyImplyLeading: false,
           centerTitle: true,
           backgroundColor: const Color.fromRGBO(127, 129, 205, 1),
           elevation: 7,
           titleTextStyle: const TextStyle(
             fontSize: 27,
-            fontWeight: FontWeight.w600,
           )),
       body: const FonctionLogin(),
       backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
