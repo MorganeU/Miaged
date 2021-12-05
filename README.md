@@ -1,16 +1,20 @@
-# miaged
+# MIAGED
 
-A new Flutter project.
+Identifiants de connection :
+* Email : test@gmail.com
+* Mot de passe : coucou
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Les fonctionnalités
 
-A few resources to get you started if this is your first Flutter project:
+- Login page
+- Liste de vêtements
+- Détail d'un vêtement
+- Panier
+- Profil utilisateur
+- Filtre sur la liste de vêtements
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Les fonctionnalités ajoutées
+
+- Sur la page de détail d'un vêtement, il est possible de cliquer sur l'image et de la zoomer
